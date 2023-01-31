@@ -11,7 +11,7 @@ body{
 }
 
 .container {
-  width: 70%;
+  width: 80%;
   margin: auto;
   text-align: center;
   position: relative;
@@ -21,8 +21,7 @@ h1{
   margin: 30px;
   text-shadow: 5px 0 white;
   font-size: 4rem;
-  color: #f6b93b;
-}
+  color: #f6b93b;}
 
 .dice {
   text-align: center;
@@ -42,14 +41,23 @@ button {
   color: white;
   border: none;
   margin: 0 auto;
+  padding: 20px 50px;
+  font-weight: 700;
 }
 button:hover {
   background-color: #f6b93b;
+  color: #181614;
   cursor: pointer;
+  font-weight: 700;
 }
 
 .btn {
   display: flex;
+}
+.flex-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 #character {
@@ -60,9 +68,45 @@ button:hover {
   left: 0;
   top: 80px;
   background-color: #181614;
-
 }
 
+
+.result {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  line-height: 40px;
+}
+
+.result-2 {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  line-height: 40px;
+}
+
+.player1-bal-div, .player2-bal-div{
+  display: flex;
+  font-size: 20px;
+  color: #8c1d0f;
+  font-weight: 800;
+}
+
+
+.player2-bal-div {
+  justify-content: flex-end;
+}
+
+.displayAlert, .displayAlert-2 {
+  font-size: 20px;
+  display: flex;
+  /* border: 2px solid #8c1d0f; */
+  /* border-radius: 30px;
+  padding: 10px; */
+}
+
+
+/* .displayAlert */
 
 .roll {
   animation: roll 0.5s infinite;
