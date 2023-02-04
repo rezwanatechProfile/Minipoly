@@ -18,4 +18,4 @@ If any players account reduced to 0, game will be over and other player will be 
 5. Write conditional statements to select the chances.
 6. Write conditional statements to buy the property.
 7. Account should be updated along with the assets account.
-8. Find out the winner. (set the limits)
+8. Find out the winner. (set the limits)![information-icon-6059](https://user-images.githubusercontent.com/120229816/216777024-4d03dc91-1ca2-4d3c-8c0f-a892f799ce5a.png)
