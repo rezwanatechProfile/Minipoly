@@ -172,7 +172,7 @@ class Player1 {
   showCoupon() {
     let userIn = prompt(
       "You can recieve $20 if you have Jail free card. Do you have Jail free card? Y/N");
-    if (userIn === "yes" || userIn === "Yes" || userIn === "y") {
+    if (userIn === "yes" || userIn === "Yes" || userIn === "y" || userIn === "Y") {
       if (this.coupon[0] === "Get out of Jail free") {
         this.accountBalance = this.accountBalance + 20;
         this.coupon.splice(this.coupon.length - 1, 1);
@@ -218,7 +218,7 @@ class Player1 {
 
         if (div2Button.hasAttribute("id", "square2")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 60;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer1();
@@ -267,7 +267,7 @@ class Player1 {
 
         if (div4Button.hasAttribute("id", "square4")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 80;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -316,7 +316,7 @@ class Player1 {
 
         if (div6Button.hasAttribute("id", "square6")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 80;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -346,7 +346,7 @@ class Player1 {
 
         if (div7Button.hasAttribute("id", "square7")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 100;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -395,7 +395,7 @@ class Player1 {
 
         if (div9Button.hasAttribute("id", "square9")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 100;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -444,7 +444,7 @@ class Player1 {
 
         if (div11Button.hasAttribute("id", "square11")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 150;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -493,7 +493,7 @@ class Player1 {
 
         if (div13Button.hasAttribute("id", "square13")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 150;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -560,7 +560,7 @@ class Player1 {
 
         if (div16Button.hasAttribute("id", "square16")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 200;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -609,7 +609,7 @@ class Player1 {
 
         if (div18Button.hasAttribute("id", "square18")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 200;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -856,7 +856,7 @@ class Player2 {
     let userIn = prompt(
       "You can recieve $20 if you have Jail free card. Do you have Jail free card? Y/N"
     );
-    if (userIn === "yes" || userIn === "Yes" || userIn === "y") {
+    if (userIn === "yes" || userIn === "Yes" || userIn === "y" || userIn === "Y") {
       if (this.coupon[0] === "Get out of Jail free") {
         this.accountBalance = this.accountBalance + 20;
         this.coupon.splice(this.coupon.length - 1, 1);
@@ -906,7 +906,7 @@ class Player2 {
 
         if (div2Button.hasAttribute("id", "square2")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 60;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer2();
@@ -956,7 +956,7 @@ class Player2 {
 
         if (div4Button.hasAttribute("id", "square4")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 80;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -1005,7 +1005,7 @@ class Player2 {
 
         if (div6Button.hasAttribute("id", "square6")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 80;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -1035,7 +1035,7 @@ class Player2 {
 
         if (div7Button.hasAttribute("id", "square7")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 100;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -1084,7 +1084,7 @@ class Player2 {
 
         if (div9Button.hasAttribute("id", "square9")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 100;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -1133,7 +1133,7 @@ class Player2 {
 
         if (div11Button.hasAttribute("id", "square11")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 150;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -1182,7 +1182,7 @@ class Player2 {
 
         if (div13Button.hasAttribute("id", "square13")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 150;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -1250,7 +1250,7 @@ class Player2 {
 
         if (div16Button.hasAttribute("id", "square16")) {
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 200;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
@@ -1300,7 +1300,7 @@ class Player2 {
         if (div18Button.hasAttribute("id", "square18")) {
 
           let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
-          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes" || userInput === "Y") {
             this.accountBalance = this.accountBalance - 200;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
