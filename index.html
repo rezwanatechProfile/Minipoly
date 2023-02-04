@@ -8,46 +8,85 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Acme" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
-  <title>Minipoly</title>
+  <title>Mini MonoPoly</title>
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to MiniPoly Game</h1>
-<div class="flex-div">
-    <div class="result">
-      <div class="player1-bal-div">YOUR ACCOUNT BALANCE IS NOW: $<span class="balance">0</span></div>
-      <div class="displayAlert"></div>
-    </div>
+  <div class="flex-div">
+  <div class="grid-container container-1">
+    <div class="grid-item grid-item-1">
+      <button class="startBtn" id="square1">Click to start and collect $200</button>
+      
+      <!-- <button class="collectBtn">Collect $200 as you pass</button> -->
 
-    <div class="result-2">
-      <div class="player2-bal-div">YOUR ACCOUNT BALANCE IS NOW: $<span class="balance-2">0</span></div>
+    </div>
+    <button class="grid-item grid-item-2" id="square2">Baltic Avenue
+      <br/><span>$60</span>
+    </button>
+    <button class="grid-item grid-item-3" id="square3">CHANCE</button>
+    <button class="grid-item grid-item-4" id="square4">Vermont Avenue<br/><span>$80</span></button>
+    <button class="grid-item grid-item-5" id="square5">CHANCE</button>
+    <button class="grid-item grid-item-6" id="square6">Oriental Avenue<br/><span>$80</span></button>
+    <button class="grid-item grid-item-7" id="square18">Park Place<br/><span>$200</span></button>
+
+    <div class="grid-item grid-item-8"><button class="chanceBtn">Pick One Chance</button><div class="chanceDisplay"></div></div>
+    <button class="grid-item grid-item-9" id="square7">Virginia Avenue<br/><span>$100</span></button>
+    <button class="grid-item grid-item-10" id="square17">CHANCE</button>
+    <div class="grid-item grid-item-11"><h1>MiniPoly Game</h1></div>
+    <button class="grid-item grid-item-12" id="square8">CHANCE</button>
+
+    <button class="grid-item grid-item-13" id="square16">California Avenue<br/><span>$200</span></button>
+    <div class="grid-item grid-item-14"><button class="dollarBtn">Starting Bonus</button></div>
+    <button class="grid-item grid-item-15" id="square9">Indiana Avenue<br/><span>$100</span></button>
+    <button class="grid-item grid-item-16" id="square15">IN JAIL</button>
+    <button class="grid-item grid-item-17" id="square14">CHANCE</button>
+    <button class="grid-item grid-item-18" id="square13">Atlantic Avenue<br/><span>$150</span></button>
+
+    <button class="grid-item grid-item-19" id="square12">CHANCE</button>
+    <button class="grid-item grid-item-20" id="square11">New York Avenue<br/><span>$150</span></button>
+    <button class="grid-item grid-item-21" id="square10">CHANCE</button>
+  </div>
+
+  <div class="grid-container container-2">
+    <div class="grid-item grid-item1"><div class="">
+      <div class="result">
+        <div class="player1-bal-div">Player 1 ACCOUNT BALANCE:  $<span class="balance">0</span></div>
+        <div>Total lands of player1:  <span class="assetBalance">0</span> </div>
+      </div>
+
+      <div class="result-2">
+        <div class="player2-bal-div">Player 2 ACCOUNT BALANCE: $<span class="balance-2">0</span></div>
+        <div>Total lands of player2:  <span class="assetBalance-2">0</span> </div>
+      </div>
+  </div></div>
+    <div class="grid-item grid-item2"><div>
+      <div class="dice">
+        <img src="./img/Dice-1.svg" id="img1" class="img-dice">
+      </div>
+      <!-- <div class="dice">
+        <img src="./img/Dice-6.svg" id="img1" class="img-dice">
+      </div> -->
+      <div class="btn-div">
+        <button id="firstPlayerbtn" class="btn">Player 1 </button>
+        <button id="secondPlayerbtn" class="btn">Player 2</button>
+        <div class="resultDiv"></div>
+      </div>
+    </div></div>
+
+    <div class="grid-item grid-item3">
+      <div class="displayResult">
+      <div class="displayAlert"></div>
       <div class="displayAlert-2"></div>
     </div>
-</div>
-
-
-
-<div>
-    <div class="dice">
-      <img src="./img/Dice-1.svg" id="img1">
+    <div class="circle-div">
+      <button class="circle1" onclick="firstPlayer.circle1Btn()">1</button>
+      <button class="circle2" onclick="secondPlayer.circle2Btn()">2</button>
     </div>
+  </div>
 
-    <div class="dice">
-      <img src="./img/Dice-6.svg" id="img2">
-    </div>
-</div>
-
-    <div class="btn">
-    <button id="firstPlayerbtn">Player 1 </button>
-    <button id="secondPlayerbtn">Player 2</button>
-    </div>
-
-    <!-- <div id="character"></div> -->
-
-    <div class="resultDiv"></div>
 
   </div>
 
+</div>
   <script src="./js/app.js"></script>
 </body>
 </html>
