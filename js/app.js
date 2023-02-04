@@ -54,6 +54,7 @@ class Player1 {
   accountBalancePlayer1 = () => {
     const balDiv = document.querySelector(".balance");
     balDiv.innerHTML = this.accountBalance;
+    return this.accountBalance
   };
   //asset balance
   assetBalancePlayer1() {
@@ -96,23 +97,26 @@ class Player1 {
 
 // function to pick a chance
   takeChance(secondPlayer) {
-    const chancebtn = document.querySelector(".chanceBtn");
+    // const chancebtn = document.querySelector(".chanceBtn");
 
-    chancebtn.addEventListener("click", () => {
+    // chancebtn.addEventListener("click", () => {
       const randomChoice = Math.floor(Math.random() * this.chances.length);
 
       if (this.chances[randomChoice] === this.chances[0]) {
         this.accountBalance = this.accountBalance - 20;
         this.chanceDisplay("“Drunk in charge” fine $20");
         this.accountBalancePlayer1();
+        return this.accountBalance
       } else if (this.chances[randomChoice] === this.chances[1]) {
         this.accountBalance = this.accountBalance + 100;
         this.chanceDisplay("Life Insurance matues. Collect $100");
         this.accountBalancePlayer1();
+        return this.accountBalance
       } else if (this.chances[randomChoice] === this.chances[2]) {
         this.accountBalance = this.accountBalance + 100;
         this.chanceDisplay("Bank pays you dividend of $100");
         this.accountBalancePlayer1();
+        return this.accountBalance
       } else if (this.chances[randomChoice] === this.chances[3]) {
         this.accountBalance = this.accountBalance - 50;
         this.chanceDisplay(
@@ -121,42 +125,48 @@ class Player1 {
         this.accountBalancePlayer1();
         secondPlayer.accountBalance = secondPlayer.accountBalance + 50;
         secondPlayer.accountBalancePlayer2();
+        return this.accountBalance
+
       } else if (this.chances[randomChoice] === this.chances[4]) {
         this.accountBalance = this.accountBalance + 350;
         this.chanceDisplay("Your building loan matures. Receive $350");
         this.accountBalancePlayer1();
+        return this.accountBalance
       } else if (this.chances[randomChoice] === this.chances[5]) {
         this.accountBalance = this.accountBalance + 250;
         this.chanceDisplay(
           "You have won a crossword competition. Collect $250"
         );
         this.accountBalancePlayer1();
+        return this.accountBalance
       } else if (this.chances[randomChoice] === this.chances[6]) {
         this.accountBalance = this.accountBalance;
         this.chanceDisplay("you recieved Get out of Jail free Card");
         this.coupon.push("Jail free Card");
         this.accountBalancePlayer1();
+        if (this.coupon[0] === "Jail free Card") {
+          let userInput = propmt("Do you want to sell your coupon?");
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+            this.accountBalance = this.accountBalance + 50;
+            this.coupon.splice(this.coupon.length - 1, 1);
+            this.chanceDisplay("You have sold your jail free card for $50");
+          } else {
+            this.chanceDisplay("The card may be needed later, or sold");
+          }
+        }
+        return this.accountBalance
       } else if (this.chances[randomChoice] === this.chances[7]) {
         this.accountBalance = this.accountBalance + 100;
         this.chanceDisplay("Your Xmas fund matures. Collect $100");
         this.accountBalancePlayer1();
+        return this.accountBalance
       } else if (this.chances[randomChoice] === this.chances[8]) {
         this.accountBalance = this.accountBalance - 150;
         this.chanceDisplay("Pay school tax of $150");
         this.accountBalancePlayer1();
+        return this.accountBalance
       }
-
-      if (this.coupon[0] === "Jail free Card") {
-        let userInput = propmt("Do you want to sell your coupon?");
-        if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
-          this.accountBalance = this.accountBalance + 50;
-          this.coupon.splice(this.coupon.length - 1, 1);
-          this.chanceDisplay("You have sold your jail free card for $50");
-        } else {
-          this.chanceDisplay("The card may be needed later, or sold");
-        }
-      }
-    });
+    // });
   }
 
   showCoupon() {
@@ -174,37 +184,27 @@ class Player1 {
     }
   }
 
-  // getInitialDollar(){
-  //   const dollarBtn = document.querySelector('.dollarBtn')
-  //   dollarBtn.addEventListener("click", () => {
-  //     this.countClicks += 1;
-  //     if (this.countClicks % 2 === 0) {
-  //       this.accountBalance = this.accountBalance + 200;
-  //       this.accountBalancePlayer1();
-  //     }
 
-  //   })
 
-  // }
+  div1(){
+    const div1Button = document.getElementById("square1");
 
-  // div1(){
-  //   const div1Button = document.getElementById("square1");
+    div1Button.addEventListener("click", () => {
+      this.countClicks += 1;
+      console.log(this.countClicks);
 
-  //   div1Button.addEventListener("click", () => {
-  //     this.countClicks += 1;
-  //     console.log(this.countClicks);
+      if (this.countClicks % 2 !== 0) {
+        const circle1 = document.querySelector(".circle1");
+        document.getElementById("square1").append(circle1);
 
-  //     if (this.countClicks % 2 !== 0) {
-  //       const circle1 = document.querySelector(".circle1");
-  //       document.getElementById("square1").append(circle1);
-
-  //       if (div1Button.hasAttribute("id", "square1")) {
-  //         alert("Please click the Initial cash to collect $200");
-  //         this.getInitialDollar()
-  //       }
-  //     }
-  //   });
-  // }
+        if (div1Button.hasAttribute("id", "square1")) {
+          this.accountBalance = this.accountBalance + 200;
+          this.accountBalancePlayer1();
+          return this.accountBalance
+        }
+      }
+    });
+  }
 
   div2() {
     const div2Button = document.getElementById("square2");
@@ -217,12 +217,16 @@ class Player1 {
         document.getElementById("square2").appendChild(circle1);
 
         if (div2Button.hasAttribute("id", "square2")) {
-          let userInput = prompt("Do you want to purchase Baltic Avenue");
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 60;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer1();
             this.assetBalancePlayer1();
+            this.findWinner(secondPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "red")
+            div2Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -243,8 +247,8 @@ class Player1 {
         document.getElementById("square3").append(circle1);
 
         if (div3Button.hasAttribute("id", "square3")) {
-          alert("Please select one card from Chance");
           this.takeChance(secondPlayer);
+          this.findWinner(secondPlayer)
         }
       }
     });
@@ -262,13 +266,17 @@ class Player1 {
         document.getElementById("square4").append(circle1);
 
         if (div4Button.hasAttribute("id", "square4")) {
-          let userInput = prompt("Do you want to purchase Vermont Avenue? Y/N");
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 80;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer1();
             this.assetBalancePlayer1();
+            this.findWinner(secondPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "red")
+            div4Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -290,6 +298,7 @@ class Player1 {
         if (div5Button.hasAttribute("id", "square5")) {
           alert("Please select one card from Chance");
           this.takeChance(secondPlayer);
+          this.findWinner(secondPlayer)
         }
       }
     });
@@ -306,13 +315,17 @@ class Player1 {
         document.getElementById("square6").append(circle1);
 
         if (div6Button.hasAttribute("id", "square6")) {
-          let userInput = prompt("Do you want to purchase Oriental Avenue? Y/N");
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 80;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer1();
             this.assetBalancePlayer1();
+            this.findWinner(secondPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "red")
+            div6Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -332,13 +345,17 @@ class Player1 {
         document.getElementById("square7").append(circle1);
 
         if (div7Button.hasAttribute("id", "square7")) {
-          let userInput = prompt("Do you want to purchase Virginia Avenue? Y/N");
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 100;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer1();
             this.assetBalancePlayer1();
+            this.findWinner(secondPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "red")
+            div7Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -360,6 +377,7 @@ class Player1 {
         if (div8Button.hasAttribute("id", "square8")) {
           alert("Please select one card from Chance");
           this.takeChance(secondPlayer);
+          this.findWinner(secondPlayer)
         }
       }
     });
@@ -376,13 +394,17 @@ class Player1 {
         document.getElementById("square9").append(circle1);
 
         if (div9Button.hasAttribute("id", "square9")) {
-          let userInput = prompt("Do you want to purchase Indiana Avenue? Y/N");
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 100;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer1();
             this.assetBalancePlayer1();
+            this.findWinner(secondPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "red")
+            div9Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -404,6 +426,7 @@ class Player1 {
         if (div10Button.hasAttribute("id", "square10")) {
           alert("Please select one card from Chance");
           this.takeChance(secondPlayer);
+          this.findWinner(secondPlayer)
         }
       }
     });
@@ -420,13 +443,17 @@ class Player1 {
         document.getElementById("square11").append(circle1);
 
         if (div11Button.hasAttribute("id", "square11")) {
-          let userInput = prompt("Do you want to purchase New York Avenue? Y/N");
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 150;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer1();
             this.assetBalancePlayer1();
+            this.findWinner(secondPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "red")
+            div11Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -448,6 +475,7 @@ class Player1 {
         if (div12Button.hasAttribute("id", "square12")) {
           alert("Please select one card from Chance");
           this.takeChance(secondPlayer);
+          this.findWinner(secondPlayer)
         }
       }
     });
@@ -464,13 +492,17 @@ class Player1 {
         document.getElementById("square13").append(circle1);
 
         if (div13Button.hasAttribute("id", "square13")) {
-          let userInput = prompt("Do you want to purchase Atlantic Avenue? Y/N");
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 150;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer1();
             this.assetBalancePlayer1();
+            this.findWinner(secondPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "red")
+            div13Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -492,6 +524,7 @@ class Player1 {
         if (div14Button.hasAttribute("id", "square14")) {
           alert("Please select one card from Chance");
           this.takeChance(secondPlayer);
+          this.findWinner(secondPlayer)
         }
       }
     });
@@ -509,7 +542,7 @@ class Player1 {
 
         if (div15Button.hasAttribute("id", "square15")) {
           alert("You are in jail");
-          showCoupon();
+          this.showCoupon();
         }
       }
     });
@@ -526,13 +559,17 @@ class Player1 {
         document.getElementById("square16").append(circle1);
 
         if (div16Button.hasAttribute("id", "square16")) {
-          let userInput = prompt("Do you want to purchase California Avenue? Y/N");
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 200;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer1();
             this.assetBalancePlayer1();
+            this.findWinner(secondPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "red")
+            div16Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -554,6 +591,7 @@ class Player1 {
         if (div17Button.hasAttribute("id", "square17")) {
           alert("Please select one card from Chance");
           this.takeChance(secondPlayer);
+          this.findWinner(secondPlayer)
         }
       }
     });
@@ -570,13 +608,17 @@ class Player1 {
         document.getElementById("square18").append(circle1);
 
         if (div18Button.hasAttribute("id", "square18")) {
-          let userInput = prompt("Do you want to purchase Park Place? Y/N");
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 200;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer1();
             this.assetBalancePlayer1();
+            this.findWinner(secondPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "red")
+            div18Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -586,7 +628,31 @@ class Player1 {
   }
 
 
+
+  findWinner(secondPlayer) {
+
+    if (secondPlayer.accountBalancePlayer2() > 0 && this.accountBalancePlayer1() <= 0) {
+      this.displayResult("Game Over! Player2 won the game.");
+      document.getElementById("secondPlayerbtn").disabled = true;
+      document.getElementById("firstPlayerbtn").disabled = true;
+    } else if (secondPlayer.accountBalancePlayer2() <= 0 && this.accountBalancePlayer1() > 0) {
+      this.displayResult("Game Over! Player1 won the game.");
+      document.getElementById("secondPlayerbtn").disabled = true;
+      document.getElementById("firstPlayerbtn").disabled = true;
+    } else if (this.accountBalancePlayer1() >= 1000 && secondPlayer.accountBalancePlayer2() < 1000) {
+      this.displayResult("Player 1 is the winner");
+      document.getElementById("secondPlayerbtn").disabled = true;
+      document.getElementById("firstPlayerbtn").disabled = true;
+    } else if (this.accountBalancePlayer1() < 1000 && secondPlayer.accountBalancePlayer2() >= 1000) {
+      this.displayResult("Player 2 is the winner");
+      document.getElementById("secondPlayerbtn").disabled = true;
+      document.getElementById("firstPlayerbtn").disabled = true;
+    }
+  }
 }
+
+
+
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 
@@ -647,6 +713,7 @@ class Player2 {
   accountBalancePlayer2 = () => {
     const balDiv = document.querySelector(".balance-2");
     balDiv.innerHTML = this.accountBalance;
+    return this.accountBalance
   };
   //asset balance
   assetBalancePlayer2() {
@@ -681,29 +748,57 @@ class Player2 {
       this.scoreValue = playDice1;
       this.displayResult(`Total role is: ${this.scoreValue}`);
 
+      //find out the winner
+
+      // if (firstPlayer.accountBalance <= 0 && this.accountBalance > 0) {
+      //   this.displayResult("Game Over! Player2 won the game.");
+      //   document.getElementById("secondPlayerbtn").disabled = true;
+      //   document.getElementById("firstPlayerbtn").disabled = true;
+      // } else if (firstPlayer.accountBalance > 0 && this.accountBalance <= 0) {
+      //   this.displayResult(
+      //     "Game Over! Player1 won the game."
+      //   );
+      //   document.getElementById("secondPlayerbtn").disabled = true;
+      //   document.getElementById("firstPlayerbtn").disabled = true;
+      // } else if (firstPlayer.accountBalance >= 1000 && this.accountBalance < 1000) {
+      //   this.displayResult("Player 1 is the winner");
+      //   document.getElementById("secondPlayerbtn").disabled = true;
+      //   document.getElementById("firstPlayerbtn").disabled = true;
+      // } else if (firstPlayer.accountBalance < 1000 && this.accountBalance >= 1000) {
+      //   this.displayResult("Player 2 is the winner");
+      //   document.getElementById("secondPlayerbtn").disabled = true;
+      //   document.getElementById("firstPlayerbtn").disabled = true;
+      // }
+
       return this.scoreValue;
     });
   };
 
   // function to pick a chance
   takeChance(firstPlayer) {
-    const chancebtn = document.querySelector(".chanceBtn");
+    // const chancebtn = document.querySelector(".chanceBtn");
 
-    chancebtn.addEventListener("click", () => {
+    // chancebtn.addEventListener("click", () => {
       const randomChoice = Math.floor(Math.random() * this.chances.length);
 
       if (this.chances[randomChoice] === this.chances[0]) {
         this.accountBalance = this.accountBalance - 20;
         this.chanceDisplay("“Drunk in charge” fine $20");
         this.accountBalancePlayer2();
+        return this.accountBalance
+
       } else if (this.chances[randomChoice] === this.chances[1]) {
         this.accountBalance = this.accountBalance + 100;
         this.chanceDisplay("Life Insurance matues. Collect $100");
         this.accountBalancePlayer2();
+        return this.accountBalance
+
       } else if (this.chances[randomChoice] === this.chances[2]) {
         this.accountBalance = this.accountBalance + 100;
         this.chanceDisplay("Bank pays you dividend of $100");
         this.accountBalancePlayer2();
+        return this.accountBalance
+
       } else if (this.chances[randomChoice] === this.chances[3]) {
         this.accountBalance = this.accountBalance - 50;
         this.chanceDisplay(
@@ -712,42 +807,49 @@ class Player2 {
         this.accountBalancePlayer2();
         firstPlayer.accountBalance = firstPlayer.accountBalance + 50;
         firstPlayer.accountBalancePlayer1();
+        return this.accountBalance
+
       } else if (this.chances[randomChoice] === this.chances[4]) {
         this.accountBalance = this.accountBalance + 350;
         this.chanceDisplay("Your building loan matures. Receive $350");
         this.accountBalancePlayer2();
+        return this.accountBalance
       } else if (this.chances[randomChoice] === this.chances[5]) {
         this.accountBalance = this.accountBalance + 250;
         this.chanceDisplay(
           "You have won a crossword competition. Collect $250"
         );
         this.accountBalancePlayer2();
+        return this.accountBalance
       } else if (this.chances[randomChoice] === this.chances[6]) {
         this.accountBalance = this.accountBalance;
         this.chanceDisplay("you recieved Get out of Jail free Card");
         this.coupon.push("Jail free Card");
         this.accountBalancePlayer2();
+        if (this.coupon[0] === "Jail free Card") {
+          let userInput = propmt("Do you want to sell your coupon?");
+          if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
+            this.accountBalance = this.accountBalance + 50;
+            this.coupon.splice(this.coupon.length - 1, 1);
+            this.chanceDisplay("You have sold your jail free card for $50");
+          } else {
+            this.chanceDisplay("The card may be needed later, or sold");
+          }
+        }
+        return this.accountBalance
       } else if (this.chances[randomChoice] === this.chances[7]) {
         this.accountBalance = this.accountBalance + 100;
         this.chanceDisplay("Your Xmas fund matures. Collect $100");
         this.accountBalancePlayer2();
+        return this.accountBalance
       } else if (this.chances[randomChoice] === this.chances[8]) {
         this.accountBalance = this.accountBalance - 150;
         this.chanceDisplay("Pay school tax of $150");
         this.accountBalancePlayer2();
+        return this.accountBalance
       }
 
-      if (this.coupon[0] === "Jail free Card") {
-        let userInput = propmt("Do you want to sell your coupon?");
-        if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
-          this.accountBalance = this.accountBalance + 50;
-          this.coupon.splice(this.coupon.length - 1, 1);
-          this.chanceDisplay("You have sold your jail free card for $50");
-        } else {
-          this.chanceDisplay("The card may be needed later, or sold");
-        }
-      }
-    });
+    // });
   }
 
   showCoupon() {
@@ -766,33 +868,31 @@ class Player2 {
     }
   }
 
-  // getDollar() {
-  //   const dollarBtn = document.querySelector(".dollarBtn");
+//   getDollar() {
+//     const dollarBtn = document.querySelector(".dollarBtn");
+//     dollarBtn.addEventListener("click", () => {
 
-  //   dollarBtn.addEventListener("click", () => {
-  //     this.accountBalance = this.accountBalance + 200;
-  //     this.accountBalancePlayer2();
-  //   });
-  // }
+// });
+//   }
 
-  // div1() {
-  //   const div1Button = document.getElementById("square1");
+  div1() {
+    const div1Button = document.getElementById("square1");
+    div1Button.addEventListener("click", () => {
+      this.countClicks += 1;
+      console.log(this.countClicks);
 
-  //   div1Button.addEventListener("click", () => {
-  //     this.countClicks += 1;
-  //     console.log(this.countClicks);
+      if (this.countClicks % 2 === 0) {
+        const circle2 = document.querySelector(".circle2");
+        document.getElementById("square1").append(circle2);
 
-  //     if (this.countClicks % 2 === 0) {
-  //       const circle2 = document.querySelector(".circle2");
-  //       document.getElementById("square1").append(circle2);
-
-  //       if (div1Button.hasAttribute("id", "square1")) {
-  //         alert("Please click the Initial cash to collect $200");
-  //         this.getDollar();
-  //       }
-  //     }
-  //   });
-  // }
+        if (div1Button.hasAttribute("id", "square1")) {
+          this.accountBalance = this.accountBalance + 200;
+          this.accountBalancePlayer2();
+          return this.accountBalance
+        }
+      }
+    });
+  }
 
   div2() {
     const div2Button = document.getElementById("square2");
@@ -805,12 +905,16 @@ class Player2 {
         document.getElementById("square2").appendChild(circle2);
 
         if (div2Button.hasAttribute("id", "square2")) {
-          let userInput = prompt("Do you want to purchase Baltic Avenue");
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 60;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer2();
             this.assetBalancePlayer2();
+            this.findWinner(firstPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "blue")
+            div2Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -833,6 +937,7 @@ class Player2 {
         if (div3Button.hasAttribute("id", "square3")) {
           alert("Please select one card from Chance");
           this.takeChance(firstPlayer);
+          this.findWinner(firstPlayer)
         }
       }
     });
@@ -850,13 +955,17 @@ class Player2 {
         document.getElementById("square4").append(circle2);
 
         if (div4Button.hasAttribute("id", "square4")) {
-          let userInput = prompt("Do you want to purchase Vermont Avenue? Y/N");
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 80;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer2();
             this.assetBalancePlayer2();
+            this.findWinner(firstPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "blue")
+            div4Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -878,6 +987,7 @@ class Player2 {
         if (div5Button.hasAttribute("id", "square5")) {
           alert("Please select one card from Chance");
           this.takeChance(firstPlayer);
+          this.findWinner(firstPlayer)
         }
       }
     });
@@ -894,15 +1004,17 @@ class Player2 {
         document.getElementById("square6").append(circle2);
 
         if (div6Button.hasAttribute("id", "square6")) {
-          let userInput = prompt(
-            "Do you want to purchase Oriental Avenue? Y/N"
-          );
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 80;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer2();
             this.assetBalancePlayer2();
+            this.findWinner(firstPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "blue")
+            div6Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -922,15 +1034,17 @@ class Player2 {
         document.getElementById("square7").append(circle2);
 
         if (div7Button.hasAttribute("id", "square7")) {
-          let userInput = prompt(
-            "Do you want to purchase Virginia Avenue? Y/N"
-          );
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 100;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer2();
             this.assetBalancePlayer2();
+            this.findWinner(firstPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "blue")
+            div7Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -952,6 +1066,7 @@ class Player2 {
         if (div8Button.hasAttribute("id", "square8")) {
           alert("Please select one card from Chance");
           this.takeChance(firstPlayer);
+          this.findWinner(firstPlayer)
         }
       }
     });
@@ -968,13 +1083,17 @@ class Player2 {
         document.getElementById("square9").append(circle2);
 
         if (div9Button.hasAttribute("id", "square9")) {
-          let userInput = prompt("Do you want to purchase Indiana Avenue? Y/N");
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 100;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer2();
             this.assetBalancePlayer2();
+            this.findWinner(firstPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "blue")
+            div9Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -996,6 +1115,7 @@ class Player2 {
         if (div10Button.hasAttribute("id", "square10")) {
           alert("Please select one card from Chance");
           this.takeChance(firstPlayer);
+          this.findWinner(firstPlayer)
         }
       }
     });
@@ -1012,15 +1132,17 @@ class Player2 {
         document.getElementById("square11").append(circle2);
 
         if (div11Button.hasAttribute("id", "square11")) {
-          let userInput = prompt(
-            "Do you want to purchase New York Avenue? Y/N"
-          );
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 150;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer2();
             this.assetBalancePlayer2();
+            this.findWinner(firstPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "blue")
+            div11Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -1042,6 +1164,7 @@ class Player2 {
         if (div12Button.hasAttribute("id", "square12")) {
           alert("Please select one card from Chance");
           this.takeChance(firstPlayer);
+          this.findWinner(firstPlayer)
         }
       }
     });
@@ -1058,15 +1181,17 @@ class Player2 {
         document.getElementById("square13").append(circle2);
 
         if (div13Button.hasAttribute("id", "square13")) {
-          let userInput = prompt(
-            "Do you want to purchase Atlantic Avenue? Y/N"
-          );
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 150;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer2();
             this.assetBalancePlayer2();
+            this.findWinner(firstPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "blue")
+            div13Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -1088,6 +1213,7 @@ class Player2 {
         if (div14Button.hasAttribute("id", "square14")) {
           alert("Please select one card from Chance");
           this.takeChance(firstPlayer);
+          this.findWinner(firstPlayer)
         }
       }
     });
@@ -1106,6 +1232,7 @@ class Player2 {
         if (div15Button.hasAttribute("id", "square15")) {
           alert("You are in jail");
           this.showCoupon();
+
         }
       }
     });
@@ -1122,15 +1249,17 @@ class Player2 {
         document.getElementById("square16").append(circle2);
 
         if (div16Button.hasAttribute("id", "square16")) {
-          let userInput = prompt(
-            "Do you want to purchase California Avenue? Y/N"
-          );
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 200;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer2();
             this.assetBalancePlayer2();
+            this.findWinner(firstPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "blue")
+            div16Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -1152,6 +1281,7 @@ class Player2 {
         if (div17Button.hasAttribute("id", "square17")) {
           alert("Please select one card from Chance");
           this.takeChance(secondPlayer);
+          this.findWinner(firstPlayer);
         }
       }
     });
@@ -1168,13 +1298,18 @@ class Player2 {
         document.getElementById("square18").append(circle2);
 
         if (div18Button.hasAttribute("id", "square18")) {
-          let userInput = prompt("Do you want to purchase Park Place? Y/N");
+
+          let userInput = prompt("This property is unowned. Would you like to purchase this property? Y/N");
           if (userInput === "yes" || userInput === "y" || userInput === "Yes") {
             this.accountBalance = this.accountBalance - 200;
             this.countOfAssets = this.countOfAssets + 1;
             this.displayalert("You have bought a land");
             this.accountBalancePlayer2();
             this.assetBalancePlayer2();
+            this.findWinner(firstPlayer)
+            const newDiv = document.createElement("div")
+            newDiv.setAttribute("class", "blue")
+            div18Button.appendChild(newDiv)
           } else {
             this.displayalert("You have chose the option not to buy");
           }
@@ -1183,44 +1318,37 @@ class Player2 {
     });
   }
 
-  getWinner(firstPlayer) {
-    // If the account balance reduced to 0, game over.
+  findWinner(firstPlayer) {
 
-    if (firstPlayer.accountBalance <= 0) {
-      this.displayResult(
-        "Game Over! Account balanace of Player1 is 0. Player2 won the game"
-      );
+    if (this.accountBalancePlayer2() > 0 && firstPlayer.accountBalancePlayer1() <= 0) {
+      this.displayResult("Game Over! Player2 won the game.");
       document.getElementById("secondPlayerbtn").disabled = true;
       document.getElementById("firstPlayerbtn").disabled = true;
-    }
-    if (this.accountBalance <= 0) {
-      this.displayResult(
-        "Game Over! Account balanace of Player2 is 0. Player1 won the game"
-      );
+    } else if (this.accountBalancePlayer2() <= 0 && firstPlayer.accountBalancePlayer1() > 0) {
+      this.displayResult("Game Over! Player1 won the game.");
       document.getElementById("secondPlayerbtn").disabled = true;
       document.getElementById("firstPlayerbtn").disabled = true;
-    }
-    // If the account balance are equal, its a tie.
-    if (firstPlayer.accountBalance >= 1000 && firstPlayer.countOfAssets >= 1) {
+    } else if (firstPlayer.accountBalancePlayer1() >= 1000 && this.accountBalancePlayer2() < 1000) {
       this.displayResult("Player 1 is the winner");
       document.getElementById("secondPlayerbtn").disabled = true;
       document.getElementById("firstPlayerbtn").disabled = true;
-    }
-
-    if (this.accountBalance >= 1000 && this.countOfAssets >= 1) {
+    } else if (firstPlayer.accountBalancePlayer1() < 1000 && this.accountBalancePlayer2() >= 1000) {
       this.displayResult("Player 2 is the winner");
       document.getElementById("secondPlayerbtn").disabled = true;
       document.getElementById("firstPlayerbtn").disabled = true;
     }
   }
+
+
 }
 
 const firstPlayer = new Player1();
 const secondPlayer = new Player2();
 firstPlayer.getScore();
+
 firstPlayer.player1RollDice();
 firstPlayer.accountBalancePlayer1();
-// firstPlayer.div1()
+firstPlayer.div1();
 firstPlayer.div2();
 firstPlayer.div3();
 firstPlayer.div4();
@@ -1238,12 +1366,14 @@ firstPlayer.div15();
 firstPlayer.div16();
 firstPlayer.div17();
 firstPlayer.div18();
+// firstPlayer.getWinner(secondPlayer)
+firstPlayer.getAccountBalance()
 
 
 
 secondPlayer.player2RollDice();
 secondPlayer.accountBalancePlayer2();
-// secondPlayer.div1()
+secondPlayer.div1()
 secondPlayer.div2();
 secondPlayer.div3();
 secondPlayer.div4();
@@ -1261,7 +1391,8 @@ secondPlayer.div15();
 secondPlayer.div16();
 secondPlayer.div17();
 secondPlayer.div18();
+secondPlayer.getAccountBalance()
+// secondPlayer.findWinner(firstPlayer)
 
-// secondPlayer.getWinner(firstPlayer)
 // secondPlayer.collectMoney()
 
